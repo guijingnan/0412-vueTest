@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>10_过渡&动画2</title>
+<style>
+  .bounce-enter-active{
+    animation:bounce-in .5s
+  }
+  .bounce-leave-active{
+    animation:bounce-in .5s reverse
+  }
+  @keyframes bounce-in {
+    from{
+      transform: scale(0);
+    }
+  50%{
+    transform: scale(1.5);
+  }
+    to{
+      transform: scale(1);
+    }
+  }
+  #msg{
+    display: inline-block;
+  }
+</style>
+</head>
+<body>
+<div id="demo">
+  <button @click="show=!show">Toggle Show</button><br>
+  <transition name="bounce">
+    <p v-show="show" id="msg">sdfsdfsfsdf</p>
+  </transition>
+</div>
+
+
+<script type="text/javascript" src="../js/vue.js"></script>
+<script>
+new Vue({
+    el:'#demo',
+    data:{
+        show:true
+    }
+})
+</script>
+</body>
+</html>

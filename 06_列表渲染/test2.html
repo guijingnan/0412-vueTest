@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>06_列表渲染_过滤与排序</title>
+</head>
+<body>
+<!--
+1. 列表过滤
+2. 列表排序
+-->
+<div id="demo">
+  <input type="text" name="names" v-model="names">
+  <ul>
+    <li v-for="(person,index) in orderPerson" :key="index">
+      {{index}}---{{person.name}}---{{person.age}}
+    </li>
+  </ul>
+  <button @click="orderType=1">升序</button>
+  <button @click="orderType=2">降序</button>
+  <button @click="orderType=3">原本排序</button>
+</div>
+
+<script type="text/javascript" src="../js/vue.js"></script>
+<script type="text/javascript">
+    new Vue({
+        el:'#demo',
+        data:{
+            orderType:2,
+            names:'',
+            persons:[
+                {name:'joke',age:18},
+                {name:'jerry',age:19},
+                {name:'marry',age:20},
+                {name:'Amy',age:21},
+            ]
+        },
+        computed:{
+            orderPerson (){
+                    let {names,persons,orderType} = this
+             persons = persons.filter(p=>p.name.indexOf(names)!==-1);
+                    if(orderType!==3){
+                      persons = persons.sort((p1,p2)=>{
+                           if(orderType === 1){
+                               return p1.age-p2.age
+                           }else{
+                               return p2.age-p1.age
+                           }
+                       })
+
+
+
+                    }
+                return persons
+            }
+        }
+    })
+</script>
+</body>
+</html>
